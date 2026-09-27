@@ -58,18 +58,11 @@ app = FastAPI(
 # (prevents Python 3.14 TLS cleanup crashes on transient AnyIO worker threads)
 _ENGINE_EXECUTOR = concurrent.futures.ThreadPoolExecutor(max_workers=1, thread_name_prefix="engine_worker")
 
-# Enable CORS for frontend development server (Vite on port 3000, 5173, etc.)
+# Enable CORS for frontend development server and public EC2 deployments
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:8000",
-    ],
-    allow_origin_regex=r"http://(localhost|127\.0\.0\.1)(:\d+)?",
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
