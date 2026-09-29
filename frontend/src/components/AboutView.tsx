@@ -8,7 +8,9 @@ import {
   AlertCircle,
   Binary,
   GitBranch,
-  ShieldCheck
+  ShieldCheck,
+  FileText,
+  ExternalLink
 } from 'lucide-react';
 import {
   KEY_METRICS,
@@ -17,6 +19,8 @@ import {
   SENSOR_SPECS,
   REAL_ALGORITHM_BENCHMARKS
 } from '../data/methodology';
+
+const PROJECT_REPORT_URL = 'https://drive.google.com/file/d/1v8gYJW0n0cL2LMhq79YugenYek5QVqEr/view?usp=sharing';
 
 export default function AboutView() {
   const steps = METHODOLOGY_STAGES;
@@ -37,6 +41,34 @@ export default function AboutView() {
           sub-pixel co-registration between Chandrayaan-2 and NASA Lunar Reconnaissance Orbiter data.
         </p>
       </div>
+
+      {/* PROJECT REPORT LINK */}
+      <section>
+        <a
+          href={PROJECT_REPORT_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block rounded-xl border-2 border-[#FF9F43]/50 bg-gradient-to-r from-[#1a1206]/80 via-[#0E1522]/90 to-[#1a1206]/80 p-5 hover:border-[#FF9F43] transition-all duration-300 hover:shadow-[0_0_24px_rgba(255,159,67,0.15)]"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-[#FF9F43]/15 border border-[#FF9F43]/30 flex items-center justify-center group-hover:bg-[#FF9F43]/25 transition-colors">
+                <FileText className="w-5 h-5 text-[#FF9F43]" />
+              </div>
+              <div>
+                <div className="text-sm font-mono font-bold text-white group-hover:text-[#FF9F43] transition-colors">
+                  Detailed Project Report — 20 Pages
+                </div>
+                <div className="text-xs text-slate-400 font-sans mt-0.5">
+                  Comprehensive technical documentation including methodology, mathematical formulation,
+                  experimental results, comparative evaluation, and references.
+                </div>
+              </div>
+            </div>
+            <ExternalLink className="w-5 h-5 text-slate-500 group-hover:text-[#FF9F43] transition-colors flex-shrink-0 ml-3" />
+          </div>
+        </a>
+      </section>
 
       {/* 1. THE PROBLEM */}
       <section className="space-y-3">
