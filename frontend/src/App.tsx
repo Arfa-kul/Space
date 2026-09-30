@@ -170,14 +170,16 @@ export default function App() {
     setRegistrationError(null);
     setCurrentStepIndex(0);
 
-    // Dynamic progress stepper while waiting for real backend
+    // Dynamic progress stepper — advance through all 6 pipeline stages while
+    // the backend is processing. 1500ms per step ≈ 7.5s total, which matches
+    // typical backend latency for real CV registration.
     let step = 0;
     const interval = setInterval(() => {
-      if (step < 4) {
+      if (step < 5) {
         step += 1;
         setCurrentStepIndex(step);
       }
-    }, 600);
+    }, 1500);
 
     try {
       const formData = new FormData();
