@@ -229,8 +229,12 @@ export default function App() {
   };
 
   const handleSourceUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
+    const file = e.target.files?.[0];
+    // Reset the input value so the same file can be re-selected
+    if (e.target) e.target.value = '';
+    if (file) {
+      // Clear demo-pair selection so it can't overwrite the uploaded image
+      setSelectedDemoPairId('');
       setSourceFile(file);
       setSourceFileName(file.name);
       setSourceImage(URL.createObjectURL(file));
@@ -241,8 +245,12 @@ export default function App() {
   };
 
   const handleRefUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
+    const file = e.target.files?.[0];
+    // Reset the input value so the same file can be re-selected
+    if (e.target) e.target.value = '';
+    if (file) {
+      // Clear demo-pair selection so it can't overwrite the uploaded image
+      setSelectedDemoPairId('');
       setReferenceFile(file);
       setReferenceFileName(file.name);
       setReferenceImage(URL.createObjectURL(file));

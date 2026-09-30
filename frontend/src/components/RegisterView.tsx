@@ -198,8 +198,10 @@ export default function RegisterView({
             if (e.dataTransfer.files?.[0]) {
               const file = e.dataTransfer.files[0];
               onSourceUpload({
-                target: { files: [file] }
+                target: { files: [file], value: '' }
               } as unknown as ChangeEvent<HTMLInputElement>);
+              // Reset ref so same file can be dropped again
+              if (sourceInputRef.current) sourceInputRef.current.value = '';
             }
           }}
         >
@@ -243,8 +245,8 @@ export default function RegisterView({
               TELEMETRY LOCK ACTIVE
             </span>
 
-            {/* Hover hint */}
-            <div className="absolute inset-0 bg-[#0A0E14]/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 text-xs font-mono text-amber-300 z-10">
+            {/* Hover hint - pointer-events-none so clicks always reach the viewport onClick */}
+            <div className="absolute inset-0 bg-[#0A0E14]/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 text-xs font-mono text-amber-300 z-10 pointer-events-none">
               <UploadCloud className="w-5 h-5 text-[#FF9F43] animate-bounce" />
               <span className="font-bold text-[11px]">CLICK OR DROP SOURCE FILE</span>
               <span className="text-[9px] text-slate-400">PDS4 / GeoTIFF / PNG</span>
@@ -298,8 +300,10 @@ export default function RegisterView({
             if (e.dataTransfer.files?.[0]) {
               const file = e.dataTransfer.files[0];
               onRefUpload({
-                target: { files: [file] }
+                target: { files: [file], value: '' }
               } as unknown as ChangeEvent<HTMLInputElement>);
+              // Reset ref so same file can be dropped again
+              if (refInputRef.current) refInputRef.current.value = '';
             }
           }}
         >
@@ -343,8 +347,8 @@ export default function RegisterView({
               REFERENCE SYNCED
             </span>
 
-            {/* Hover hint */}
-            <div className="absolute inset-0 bg-[#0A0E14]/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 text-xs font-mono text-cyan-300 z-10">
+            {/* Hover hint - pointer-events-none so clicks always reach the viewport onClick */}
+            <div className="absolute inset-0 bg-[#0A0E14]/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 text-xs font-mono text-cyan-300 z-10 pointer-events-none">
               <UploadCloud className="w-5 h-5 text-[#3FD0E0] animate-bounce" />
               <span className="font-bold text-[11px]">CLICK OR DROP REFERENCE FILE</span>
               <span className="text-[9px] text-slate-400">PDS4 / GeoTIFF / PNG</span>
